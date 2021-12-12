@@ -24,6 +24,8 @@ import List from "@editorjs/list";
 //import ImageTool from '@editorjs/image';
 import Embed from '@editorjs/embed';
 import Raw from '@editorjs/raw';
+import Table from '@editorjs/table';
+import Marker from '@editorjs/marker';
 export default {
   data() {
     return {
@@ -69,6 +71,18 @@ export default {
             }
           },
           raw: Raw,
+          table: {
+            class: Table,
+            inlineToolbar: true,
+            config: {
+              rows: 2,
+              cols: 3,
+            },
+          },
+          Marker: {
+            class: Marker,
+            shortcut: 'CMD+SHIFT+M',
+          }
         },
         onReady: function() {
           console.log("ready");
