@@ -11,8 +11,8 @@
       <Slatejs v-show="selected===2" />
       <Ckeditor v-show="selected===3" />
       <Draftjs v-show="selected===4" />
-      <Quill v-show="selected===5" />
-      <Tinymce v-show="selected===6" />
+      <Quill v-show="selected===5" v-model="quillValue"/>
+      <!-- <Tinymce v-show="selected===6" /> -->
     </div>
   </div>
 </template>
@@ -23,16 +23,17 @@ import Slatejs from './components/Slatejs.vue'
 import Ckeditor from './components/Ckeditor.vue'
 import Draftjs from './components/Draftjs.vue'
 import Quill from './components/Quill.vue'
-import Tinymce from './components/Tinymce.vue'
+//import Tinymce from './components/Tinymce.vue'
 
 export default {
   name: 'App',
   components: {
-    Editorjs,Slatejs,Ckeditor,Draftjs,Tinymce,Quill
+    Editorjs,Slatejs,Ckeditor,Draftjs,Quill
   },
   data(){
     return{
-      selected:1
+      selected:1,
+      quillValue:''
     }
   }
 }

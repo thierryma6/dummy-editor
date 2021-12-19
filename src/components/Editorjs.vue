@@ -7,7 +7,8 @@
 
     <div class="editorx_body">
       <!--editorjs id-->
-      <div class id="codex-editor"/>
+      <!-- style="pointer-events: none;" -->
+      <div class id="codex-editor" />
     </div>
     <button style="margin-left: 30%;" type="button" name="button" @click="save()">save</button>
     <div class="editorx_body">
@@ -26,6 +27,9 @@ import Embed from '@editorjs/embed';
 import Raw from '@editorjs/raw';
 import Table from '@editorjs/table';
 import Marker from '@editorjs/marker';
+import {SimpleImage} from './editorjs/simple-image'
+import './editorjs/simple-image.css'
+
 export default {
   data() {
     return {
@@ -43,22 +47,35 @@ export default {
       window.editor = new EditorJS({
         holder: "codex-editor",
         autofocus: true,
+        placeholder: 'Let`s write an awesome story!',
         /**
          * This Tool will be used as default
          */
-        initialBlock: "paragraph",
+        defaultBlock: "paragraph",
+        hideToolbar:true,
+        //tunes:['test1', 'test2'],
+        inlineToolbar:['bold'],
         tools: {
           header: {
             class: Header,
-            shortcut: "CMD+SHIFT+H"
+            shortcut: "CMD+SHIFT+H",
+            inlineToolbar:false,
+            readOnly:true,
+            config: {
+              placeholder: ".",
+              readOnly:true
+            }
           },
           list: {
+            inlineToolbar: false,
             class: List
           },
           paragraph: {
             class: Paragraph,
+            readOnly:true,
             config: {
-              placeholder: "."
+              placeholder: 'Let`s write an awesome story!',
+              readOnly:true
             }
           },
           embed: {
@@ -82,15 +99,30 @@ export default {
           Marker: {
             class: Marker,
             shortcut: 'CMD+SHIFT+M',
+          },
+          image: {
+            class: SimpleImage,
+            inlineToolbar: true,
+            config: {
+              placeholder: 'Paste image URL',
+              readOnly:true
+            },
+            readOnly:true
           }
         },
+         
         onReady: function() {
           console.log("ready");
+        //   let tool = document.querySelectorAll(".ce-toolbar");
+        // for (let i = 0; i < tool.length; i++) {
+        //     tool[i].style.display = "none"
+        // }
         },
         onChange: function() {
           console.log("change");
         }
-      });
+      },
+      );
     }
   },
   mounted: function() {
